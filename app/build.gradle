@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 22
-  buildToolsVersion "27.0.3"
+  compileSdkVersion 28
   defaultConfig {
     applicationId "net.androidwing.hotxposeddemo"
-    minSdkVersion 15
-    targetSdkVersion 22
+    minSdkVersion 21
+    targetSdkVersion 21
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,8 +19,7 @@ android {
 }
 
 dependencies {
-  compile project (':hotxposed')
+  implementation project(':hotxposed')
   compileOnly 'de.robv.android.xposed:api:82'
-
 }
 

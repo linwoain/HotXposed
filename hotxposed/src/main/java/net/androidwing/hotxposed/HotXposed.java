@@ -1,6 +1,5 @@
 package net.androidwing.hotxposed;
 
-import android.app.AndroidAppHelper;
 import android.util.Log;
 import dalvik.system.PathClassLoader;
 import de.robv.android.xposed.XC_MethodHook;
@@ -15,7 +14,7 @@ public class HotXposed {
   public static void hook(Class clazz, XC_LoadPackage.LoadPackageParam lpparam)
       throws Exception {
     String packageName = clazz.getName().replace("."+clazz.getSimpleName(),"");
-    File apkFile = getApkFile(packageName);
+    File apkFile = getApkFile();
 
     if (!apkFile.exists()) {
       Log.e("error", "apk file not found");
@@ -48,11 +47,11 @@ public class HotXposed {
   }
 
 
-  private static File getApkFile(String packageName) {
-    String filePath = String.format("/data/app/%s-%s/base.apk", packageName, 1);
+  private static File getApkFile() {
+    String filePath = String.format("/data/app/%s-%s/base.apk", BuildConfig.APPLICATION_ID, 1);
     File apkFile = new File(filePath);
     if (!apkFile.exists()) {
-      filePath = String.format("/data/app/%s-%s/base.apk", packageName, 2);
+      filePath = String.format("/data/app/%s-%s/base.apk", BuildConfig.APPLICATION_ID, 2);
       apkFile = new File(filePath);
     }
     return apkFile;
