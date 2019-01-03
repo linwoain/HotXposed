@@ -3,6 +3,7 @@ package net.androidwing.hotxposed;
 import android.util.Log;
 import dalvik.system.PathClassLoader;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import java.io.File;
@@ -13,13 +14,14 @@ import java.io.File;
 public class HotXposed {
   public static void hook(Class clazz, XC_LoadPackage.LoadPackageParam lpparam)
       throws Exception {
-    String packageName = clazz.getName().replace("."+clazz.getSimpleName(),"");
     File apkFile = getApkFile();
 
     if (!apkFile.exists()) {
       Log.e("error", "apk file not found");
+      XposedBridge.log("未找到apk文件");
       return;
     }
+    XposedBridge.log("找到apk文件");
 
     filterNotify(lpparam);
 
