@@ -26,7 +26,7 @@ public class HotXposed {
     filterNotify(lpparam);
 
     PathClassLoader classLoader =
-        new PathClassLoader(apkFile.getAbsolutePath(), lpparam.getClass().getClassLoader());
+        new PathClassLoader(apkFile.getAbsolutePath(), ClassLoader.getSystemClassLoader());
 
     XposedHelpers.callMethod(classLoader.loadClass(clazz.getName()).newInstance(), "dispatch",lpparam);
 
